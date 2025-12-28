@@ -1,190 +1,286 @@
-[![Stars][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<p align="center">
+  <img src="https://img.shields.io/github/license/joelle-jnbaptiste/SchoolProject---Autonomous-driving-image-segmentation?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/School%20Project-Computer%20Vision%20%26%20ML-blueviolet?style=for-the-badge" />
+</p>
 
-<br />
+<h1 align="center">✨ Autonomous Driving Image Segmentation ✨</h1>
+
 <div align="center">
+  <em>
+     *Teaching machines to see the road through pixels and patterns*
+  </em>
+</br>
 
-
-  <h1 align="center">🏰 SchoolProject — Autonomous Driving Image Segmentation</h1>
-
-  <p align="center">
-    🪄 End-to-end image segmentation system for autonomous driving — from model training to an inference API and a visualization web app, designed with embedded computer vision constraints in mind.
-    <br />
-    <br />
-    🗺️ <a href="https://www.cityscapes-dataset.com/dataset-overview/"><strong>Dataset (Cityscapes) »</strong></a>
-    ·
-    🧙 <a href="#"><strong>Project Repository</strong></a>
-  </p>
+ <b>End-to-end semantic segmentation system for autonomous driving, from model training to real-time inference and visualization</b>
+</br>
+</br>
+🗃️ **Dataset**  
+https://www.cityscapes-dataset.com/dataset-overview/
 </div>
 
 ---
 
-## ✨ About The Project
-
-Welcome, traveler.
-
-This repository is a **full end-to-end semantic segmentation platform** built for an autonomous driving use case.  
-It unifies three core pillars into a single, coherent project:
-
-- 🧠 **Modelisation** — train and evaluate segmentation models (PyTorch and TensorFlow notebooks)
-- 🏹 **Backend** — serve predictions through a FastAPI inference API
-- 🪄 **Frontend** — visualize predictions with a Streamlit web interface
-
-The mission is to transform raw road scene images into **semantic maps**, enabling a system to understand the environment (road, vehicles, pedestrians, buildings, vegetation, etc.).  
-The implementation is deliberately structured with a production mindset: **reproducible training**, **portable inference**, and **user-facing visualization**.
-
----
-
-## ⚔️ Built With
-
-<!-- Badge-style "gommettes" (vignettes) -->
-![Python][python-shield]
-![PyTorch][pytorch-shield]
-![TensorFlow][tensorflow-shield]
-![FastAPI][fastapi-shield]
-![Streamlit][streamlit-shield]
-![Docker][docker-shield]
-![GitHub Actions][gha-shield]
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>🧭 Table of Contents</summary>
+  <ol>
+    <li>About The Project</li>
+    <li>Dataset</li>
+    <li>System Architecture</li>
+    <li>Models & Training</li>
+    <li>Evaluation</li>
+    <li>Repository Structure</li>
+    <li>Getting Started</li>
+  </ol>
+</details>
 
 ---
 
-## 🗺️ Project Structure
+### ✨ Built With
+
+[![Python][Python-shield]][Python-url]
+[![PyTorch][PyTorch-shield]][PyTorch-url]
+[![TensorFlow][TensorFlow-shield]][TensorFlow-url]
+[![FastAPI][FastAPI-shield]][FastAPI-url]
+[![Streamlit][Streamlit-shield]][Streamlit-url]
+[![Docker][Docker-shield]][Docker-url]
+[![GitHub Actions][GHA-shield]][GHA-url]
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+---
+
+## 🎯 About The Project
+
+This project implements a **full end-to-end semantic segmentation pipeline** designed for an autonomous driving use case.
+
+It is structured into three complementary components:
+
+- **Modelisation** – training and evaluation of segmentation models
+- **Backend** – FastAPI inference service for image segmentation
+- **Frontend** – Streamlit interface to visualize predictions
+
+The project follows a **production-oriented approach**, focusing on reproducibility, modularity, and deployment constraints.
+
+---
+
+## 🗃️ Dataset
+
+This project is based on the **Cityscapes** dataset, a large-scale benchmark designed for urban scene understanding in autonomous driving.
+
+https://www.cityscapes-dataset.com/dataset-overview/
+
+### Dataset Overview
+
+The dataset contains high-resolution street-view images with fine-grained pixel-level annotations, including:
+
+- Roads
+- Cars
+- Pedestrians
+- Buildings
+- Vegetation
+- Sky
+- Traffic signs and objects
+
+### Usage in This Project
+
+In this project, the dataset is used to:
+
+- Train semantic segmentation models
+- Evaluate qualitative and quantitative performance
+- Demonstrate an end-to-end computer vision pipeline
+- Validate inference constraints for embedded or production environments
+
+Only a subset of the dataset is used for experimentation and demonstration purposes.
+
+
+---
+
+## 🏰 System Architecture
+
+The system follows a simple but realistic architecture:
+
+- Training and experimentation performed offline in notebooks
+- Export of a trained segmentation model
+- Inference served through a FastAPI backend
+- Visualization and testing via a Streamlit frontend
+
+This separation allows independent iteration on modeling, inference, and user interaction layers.
+
+---
+
+## 🪄 Models & Training
+
+Inside the `modelisation/` directory, notebooks cover:
+
+- Dataset loading and preprocessing
+- Data augmentation and normalization
+- Model training and validation
+- Quantitative and qualitative evaluation
+- Cross-framework experiments (PyTorch and TensorFlow)
+
+The final model is exported in a lightweight format suitable for inference.
+
+---
+
+## 👑 Evaluation
+
+Model performance is assessed using:
+- Visual inspection of predicted segmentation masks
+- Comparison with ground-truth annotations
+- Qualitative analysis of class-wise behavior
+
+The focus is placed on **interpretability and robustness**, rather than raw benchmark optimization.
+
+---
+
+## 🗺️ Repository Structure
 
     SchoolProject---Autonomous-driving-image-segmentation/
+    ├── back/                     # FastAPI inference backend
+    │   ├── api/
+    │   ├── model/
+    │   ├── main.py
+    │   └── requirements.txt
     │
-    ├── back/                          # 🏹 FastAPI inference backend
-    │   ├── .github/workflows/          # ⚙️ CI pipelines
-    │   │   └── master_onboard-system-api.yml
-    │   ├── model/                      # 🧪 Inference artifacts (TFLite)
-    │   │   └── model_quant.tflite
-    │   ├── main.py                     # ⚡ API entrypoint
-    │   ├── requirements.txt            # 📦 Backend deps
-    │   ├── install-app.sh              # 🧰 Setup helper
-    │   └── install-conda.sh            # 🧰 Setup helper
+    ├── front/                    # Streamlit visualization app
+    │   ├── app.py
+    │   └── requirements.txt
     │
-    ├── front/                          # 🪄 Streamlit visualization app
-    │   ├── app.py                      # 🎨 Frontend app
-    │   ├── requirements.txt            # 📦 Frontend deps
-    │   ├── install-app.sh              # 🧰 Setup helper
-    │   └── install-conda.sh            # 🧰 Setup helper
-    │
-    ├── modelisation/                   # 🧠 Training & experiments
-    │   ├── modelisationPytorch.ipynb
-    │   ├── modelisationTensorflow.ipynb
+    ├── modelisation/             # Training & experiments
+    │   ├── notebooks
     │   └── README.md
     │
     └── README.md
 
 ---
 
-## 🗃️ Dataset
+## ⚔️ Getting Started
 
-This project is based on an autonomous driving semantic segmentation benchmark dataset:
+This project is composed of three independent parts:
+- model training and experimentation
+- a FastAPI inference backend
+- a Streamlit visualization frontend
 
-- 🏙️ **Cityscapes — Dataset Overview**: https://www.cityscapes-dataset.com/dataset-overview/
-
-The dataset provides urban street scene images and pixel-level annotations for multiple semantic classes (road, cars, pedestrians, buildings, vegetation, sky, etc.).  
-In this project, the dataset is used to train segmentation models and validate qualitative/quantitative performance.
-
----
-
-## 🧠 Modelisation
-
-Inside `modelisation/`, you’ll find notebooks covering:
-
-- 🧪 Dataset loading & preprocessing (resize, normalization, augmentation if applicable)
-- 📉 Training loops / training strategy (loss tracking, validation monitoring)
-- 🧭 Evaluation (mIoU / IoU, qualitative mask visualization)
-- 🧩 Cross-framework experimentation:
-  - 🔥 PyTorch notebook for training & evaluation
-  - 🌀 TensorFlow notebook for alternative training and/or export compatibility
+You can run each component separately depending on your objective.
 
 ---
 
-## 🏹 Backend — FastAPI Inference API
+### 1️⃣ Model Training & Experiments (optional)
 
-The `back/` domain exposes a lightweight prediction service:
+If you want to explore or retrain the segmentation models:
 
-- Accepts an input image via HTTP
-- Applies preprocessing
-- Runs inference using a **quantized TFLite model** (`model_quant.tflite`)
-- Produces a segmentation mask (and optional color mapping / encoding)
-- Returns the predicted mask to the client
+    cd modelisation
+    python -m venv .venv
+    source .venv/bin/activate        # Linux / macOS
+    .venv\Scripts\activate           # Windows
 
-### ✅ Main Endpoint (example)
-- `POST /predict` — upload an image and receive the predicted segmentation output
+    pip install -r requirements.txt
 
----
-
-## 🪄🎨 Frontend — Streamlit App
-
-The `front/` domain is a simple interactive app to:
-
-- Upload an image
-- Send it to the backend API
-- Display the original + segmentation prediction
-- Quickly test the system end-to-end
+Open the notebooks to:
+- load and preprocess the Cityscapes dataset
+- train segmentation models
+- evaluate predictions visually
+- export a trained model for inference
 
 ---
 
-## 🧭 Quickstart
+### 2️⃣ Run the Backend (FastAPI)
 
-### 🏹 Run the Backend (FastAPI)
+The backend exposes an HTTP API for image segmentation.
 
     cd back
-    python -m venv env
-    source env/bin/activate
+    python -m venv .venv
+    source .venv/bin/activate        # Linux / macOS
+    .venv\Scripts\activate           # Windows
+
     pip install -r requirements.txt
+
+Start the API server:
+
     uvicorn main:app --reload
 
-### 🪄 Run the Frontend (Streamlit)
+The API will be available locally and ready to receive image requests.
+
+---
+
+### 3️⃣ Run the Frontend (Streamlit)
+
+The frontend allows you to test the system end-to-end through a web interface.
 
     cd front
-    python -m venv env
-    source env/bin/activate
+    python -m venv .venv
+    source .venv/bin/activate        # Linux / macOS
+    .venv\Scripts\activate           # Windows
+
     pip install -r requirements.txt
+
+Launch the Streamlit app:
+
     streamlit run app.py
 
----
-
-## 🎓 What This Project Demonstrates
-
-- 🧠 End-to-end ML thinking (training → serving → UX)
-- 🗺️ Semantic segmentation fundamentals
-- 🏹 Inference API design (FastAPI)
-- 🪄 A lightweight visualization layer (Streamlit)
-- 🧰 Engineering hygiene (clear structure, scripts, CI-ready layout)
+You can then:
+- upload an image
+- send it to the backend API
+- visualize the predicted segmentation mask
 
 ---
 
-## 📜 License
+### 4️⃣ Full End-to-End Test
 
-Distributed under the MIT License. See `LICENSE` for more information.
+To test the complete pipeline:
+
+1. Start the FastAPI backend
+2. Launch the Streamlit frontend
+3. Upload an image in the UI
+4. Inspect the segmentation output
+
+This simulates a simplified production workflow:
+**model → API → user interface**
+
 
 ---
 
-## 🔮 Contact
+## ✒️ License
 
-Joëlle JEAN-BAPTISTE — via LinkedIn: [LinkedIn][linkedin-url]
+This project is provided for educational purposes only.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ---
 
-<!-- MARKDOWN LINKS & IMAGES (shields / badges) -->
-[stars-shield]: https://img.shields.io/github/stars/joelle-jnbaptiste/SchoolProject---Autonomous-driving-image-segmentation.svg?style=for-the-badge
-[stars-url]: https://github.com/joelle-jnbaptiste/SchoolProject---Autonomous-driving-image-segmentation/stargazers
-[issues-shield]: https://img.shields.io/github/issues/joelle-jnbaptiste/SchoolProject---Autonomous-driving-image-segmentation.svg?style=for-the-badge
-[issues-url]: https://github.com/joelle-jnbaptiste/SchoolProject---Autonomous-driving-image-segmentation/issues
-[license-shield]: https://img.shields.io/github/license/joelle-jnbaptiste/SchoolProject---Autonomous-driving-image-segmentation.svg?style=for-the-badge
-[license-url]: https://github.com/joelle-jnbaptiste/SchoolProject---Autonomous-driving-image-segmentation/blob/main/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white
-[linkedin-url]: https://www.linkedin.com/
+## 🕊️ Contact
 
-[python-shield]: https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white
-[pytorch-shield]: https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white
-[tensorflow-shield]: https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white
-[fastapi-shield]: https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white
-[streamlit-shield]: https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white
-[docker-shield]: https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
-[gha-shield]: https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white
+Joëlle JEAN BAPTISTE  
+LinkedIn:
+
+    https://fr.linkedin.com/in/jo%C3%ABllejnbaptiste
+
+Project Repository:
+
+    https://github.com/joelle-jnbaptiste/SchoolProject---Autonomous-driving-image-segmentation
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+---
+
+[Python-shield]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
+[Python-url]: https://www.python.org/
+
+[PyTorch-shield]: https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white
+[PyTorch-url]: https://pytorch.org/
+
+[TensorFlow-shield]: https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white
+[TensorFlow-url]: https://www.tensorflow.org/
+
+[FastAPI-shield]: https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white
+[FastAPI-url]: https://fastapi.tiangolo.com/
+
+[Streamlit-shield]: https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white
+[Streamlit-url]: https://streamlit.io/
+
+[Docker-shield]: https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
+[Docker-url]: https://www.docker.com/
+
+[GHA-shield]: https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white
+[GHA-url]: https://github.com/features/actions
